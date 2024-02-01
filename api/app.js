@@ -24,8 +24,10 @@ app.use(cors({
 }))
 
 const AuthRoute = require('./server/routes/AuthRoute')
+const UserRoute = require('./server/routes/UserRoute')
 
 app.use("/auth", AuthRoute)
+app.use("/user", UserRoute)
 
 app.get("/", (req, res) => {
     res.send("RADII")

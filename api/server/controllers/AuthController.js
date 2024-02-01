@@ -1,4 +1,5 @@
 const User = require('../models/User')
+const jsonwebtoken = require('jsonwebtoken')
 
 module.exports.Register = async(req, res) => {
 
@@ -74,4 +75,12 @@ module.exports.Login = async (req, res) => {
             error: error.message
         })
     }
+}
+
+module.exports.Logout = async (req, res, next) => {
+    res.clearCookie("token")
+    res.json({
+        success: true,
+        message: "Logged out"
+    })
 }

@@ -5,8 +5,8 @@ const url = process.env.MONGODB_URL;
 const MongoDB_Connection = async () => {
 
     await mongoose.connect(url, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
+        //useNewUrlParser: true,
+       // useUnifiedTopology: true,
     })
     .then(() => {console.log('Radi Mongo')})
     .catch((err) => {console.log(err) })
