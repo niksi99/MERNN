@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate} from "react-router-dom";
 import axios from "axios";
+import { useCookies } from 'react-cookie'
 
 const Login = () => {
 
@@ -9,7 +10,7 @@ const Login = () => {
 
   const navigate = useNavigate();
 
-
+  const [_, setCookie] = useCookies([])
 
   const handleLoggingIn = (event) =>{
     event.preventDefault();
@@ -21,7 +22,12 @@ const Login = () => {
     axios.post("http://localhost:9894/auth/login", data)
       .then((res) => {
         console.log(res)
-        navigate("/welcome")
+        if(res.data.success === true) {
+          setCookie("token", res.data.token);
+          window.localStorage.setItem("token", res.data.token);
+          window.localStorage.setItem("loggedIn", true);
+          navigate("/welcome")
+        }
       })
       .catch((error) => {console.log(error)})
   }
